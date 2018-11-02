@@ -1,9 +1,9 @@
 # main links links
 main:
-  - title: "Machine Learning Tutorials"
+  - title: "Tutorials"
     url: https://chunml.github.io/tutorials
     
-  - title: "My Project Page"
+  - title: "Projects"
     url: https://chunml.github.io/portfolio
     
   - title: "About"
