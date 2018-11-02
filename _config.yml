@@ -10,7 +10,7 @@ locale                   : "en"
 title                    : "Chun's Machine Learning Page"
 title_separator          : "-"
 name                     : "Trung Tran"
-description              : "Page of a machine learning's enthuasiast."
+description              : "Page of a deep learning's enthuasiast."
 url                      : "https://ChunML.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "/ChunML.github.io" # the subpath of your site, e.g. "/blog"
 repository               : "ChunML/ChunML.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -81,7 +81,7 @@ author:
   avatar           : "bio-photo.jpg"
   bio              : "GearHead & Deep Learning Enthusiast"
   location         : "Tokyo, Japan"
-  email            : "ahzhong11491@gmail.com"
+  email            : "chunml.techexplained@gmail.com"
   uri              :
   bitbucket        :
   codepen          :
