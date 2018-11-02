@@ -23,7 +23,7 @@ To be honest, when I started using Tensorflow, I was in that situation too. Tens
 But then, I suddenly got an idea. Why not create a series of blog posts about Tensorflow ;)
 
 ### Objectives
----
+***
 Let's talk about what we're gonna focus on in this post. I learned this thing the hardest way, guys. I think I will make a post about what I learned from writing technical blog posts, and one of them is: do talk about the objectives first!
 
 So, here's what we will do in this post:
@@ -44,7 +44,6 @@ Whether it comes to importing data, creating the model or visualizing the result
 I think this is the problem that a lot of you guys can relate to. In Tensorflow, we must first define the computation graph. Not only doing this way prevents us from modifying the graph when it's running (sometimes we just want it to be dynamic), but it also does a good job at hiding things from us, which we can't know what the hell under the hood is causing the trouble. We are the Python guys, we want things to be Pythonic!
 
 ## Tensorflow's Vocabulary
----
 As I said above, one problem with Tensorflow is that there are a lot of ways to do the exact same thing. Even experienced users find it confusing sometimes.
 
 Below, I'm gonna list out some "concepts" that are mostly confusing to beginners:
@@ -142,7 +141,6 @@ array([[ 0.06691323, -0.01890625, -0.00283119],
 Rumor has it Eager Execution is gonna be set to default from Tensorflow 2.0. I think this move will please a lot of Tensorflow fans out there. But please bear in mind that at the moment, not everything is gonna work in Eager Execution mode (yet). So while we're waiting for Tensorflow 2.0 to be released, it's a good idea to stay updated to the latest news from Tensorflow's team and Google.
 
 ## (Optional) Let's play with Tensors!
----
 Okay guys, this is an optional section. We're gonna see if different approaches produce exactly the same results. We're gonna create a "real" convolution2d layer, including activation functions and regularization terms, by using tf.contrib.layers and tf.layers. We will check the similarity among their results by checking the variables and operations that they created.
 
 Oh hold on! There's one more thing I want you to pay attention to. I will write out all the arguments whether some of them have default values. The reason is, the two modules' conv2d functions set the default values differently for the same terms! For example, padding is set to 'SAME' by default in tf.contrib.layers.conv2d, but 'valid' in case of tf.layers.conv2d. Now we're ready to move on.
@@ -252,7 +250,6 @@ Now, what is the verdict? As we can observe above. Using tf.contrib or tf.layers
 But hey, you can't see that the names are obviously different, can you? You might ask. As long as the shapes and types of variables are the same, mapping the names between the two variable sets is not that painful task. In fact, it's just no more than 5 lines of code and yeah, you only need to know how to do it. As we addressed the problems earlier in this post, Tensorflow is not hard, it is just kind of confusing.
 
 ## Conclusion
----
 Oh, that was so long. Thank you guys for reading. Before we say goodbye, let's take a look at what we did in this post:
 - We discussed why Tensorflow may seem confusing
 - We talked about heavily in-use Tensorflow module
