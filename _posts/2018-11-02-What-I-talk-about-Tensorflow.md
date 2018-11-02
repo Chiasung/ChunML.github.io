@@ -18,9 +18,9 @@ Some of my collegues, as well as many of my readers told me that they had proble
 
 > Hey Trung, what is the difference between tf.contrib.layers and tf.layers? Oh, and what is the TF-Slim thing? And now we have the godd*** tf.estimator. What are all these for? What are we supposed to use?
 
-To be honest, when I started using Tensorflow, I was in that situation too. Tensorflow was already pretty bulky back then, and to make things even worse, it just kept getting bigger and bigger. If you don't believe me, just look at the size of the installation file and compare it with previous versions.
+To be honest, when I started using Tensorflow, I was in that situation too. Tensorflow was already pretty bulky back then, and to make things even worse, it just kept getting bigger and bigger. If you don't believe me, just look at the size of the current installation package and compare it to previous versions.
 
-But then, I suddenly got an idea. Why not create a series of blog posts about Tensorflow ;)
+But wait! I just got an idea. Why not create a series of blog posts about Tensorflow ;)
 
 ### Objectives
 ***
@@ -65,7 +65,7 @@ with tf.variable_scopes('fc_layer'):
 
 ### tf.contrib
 
-You are likely to come across tf.contrib.layers a lot. Basically, it's backed by the large community of Tensorflow (contribution) and it contains experimental implementation, such as a newly introduced layer, a new optimization method, or even wrappers for low-level API, etc. Although they are technically just experimental codes, they actually work well and will be merged to Tensorflow's core code in the future.
+You are likely to come across tf.contrib.layers a lot. Basically, it's backed by the large community of Tensorflow (contrib stands for contribution) and it contains experimental implementation, such as a newly introduced layer, a new optimization method, or just wrappers for low-level API, etc. Although they are technically just experimental codes, they actually work very well and will be merged to Tensorflow's core code in the future.
 
 ### tf.layers
 
@@ -124,7 +124,7 @@ Although Keras is super convenient, especially for those who don't like to write
 
 As I mentioned earlier, when implementing in Tensorflow, you must first define all the operations to form a graph. It's not until the graph is finalized (it's locked, no more in, no more out, no more update) that you can run it to see the results. Because of this, Tensorflow is hard to debug and incapable of creating dynamic graph.
 
-So Eager Execution came out to help deal with these problems. The name is kind of weird though. I interprete it as "can't wait to execute". With the additional 2 new lines, you can now do something like: evaluate the new created variable (which is trivial but used to be impossible in Tensorflow):
+So Eager Execution came out to help deal with these problems. The name is kind of weird though. I interprete it as "can't wait to execute". With the additional 2 new lines, you can now do something like: evaluate the new created variable (which seems trivial but used to be impossible in Tensorflow):
 
 ```
 tf.enable_eager_execution()
@@ -143,7 +143,9 @@ Rumor has it Eager Execution is gonna be set to default from Tensorflow 2.0. I t
 ## (Optional) Let's play with Tensors!
 Okay guys, this is an optional section. We're gonna see if different approaches produce exactly the same results. We're gonna create a "real" convolution2d layer, including activation functions and regularization terms, by using tf.contrib.layers and tf.layers. We will check the similarity among their results by checking the variables and operations that they created.
 
-Oh hold on! There's one more thing I want you to pay attention to. I will write out all the arguments whether some of them have default values. The reason is, the two modules' conv2d functions set the default values differently for the same terms! For example, padding is set to 'SAME' by default in tf.contrib.layers.conv2d, but 'valid' in case of tf.layers.conv2d. Now we're ready to move on.
+Oh hold on! There's one more thing I want you to pay attention to. I will write out all the arguments whether some of them have default values. The reason is, the two modules' conv2d functions set the default values differently for the same terms! For example, padding is set to 'SAME' by default in tf.contrib.layers.conv2d, but 'valid' in case of tf.layers.conv2d.
+
+Now we're ready to move on.
 
 ### tf.contrib.layers
 
@@ -167,7 +169,7 @@ conv2d = tf.contrib.layers.conv2d(inputs=inputs,
 ```
 ### tf.layers
 
-Next, let's see how we can create a convolution2d layer with tf.layers, an official modules by the core team of Tensorflow ;) Obviously we at least expect that it can produce the same result, with less or similar or effort.
+Next, let's see how we can create a convolution2d layer with tf.layers, an official modules by the core team of Tensorflow ;) Obviously we expect that it can produce the same result, with less or (at least) similar effort.
 
 ```
 conv2d = tf.layers.conv2d(inputs=inputs,
@@ -257,6 +259,6 @@ Oh, that was so long. Thank you guys for reading. Before we say goodbye, let's t
 
 This post is no more than an entry point, some kind of what-I-would-talk-about-when-I-talk-about-Tensorflow (I borrowed that title from Haruki Murakami, check it [here](https://www.amazon.com/What-About-Running-Vintage-International-ebook/dp/B0015DWJ8W)).
 
-Personally, I am a big fan of learning-by-doing style. Even in the deep-learning field which seems way to deeply academic, it can work out well. In the future posts, I will guide you through how we can accomplish the most common tasks with Tensorflow. Those won't make you a deep learning guru, but with a solid understanding about how to use the proper tool, and with some practice from your own, what can stop you from building amazing things?
+Personally, I am a big fan of learning-by-doing style. Even in the deep-learning field which seems way too deeply academic, it can work out well. In the future posts, I will guide you through how we can accomplish the most common tasks with Tensorflow. Those won't make you a deep learning guru, but with a solid understanding about how to use the proper tool, and with some practice from your own, what can stop you from building amazing things?
 
 Okay, I might have exaggerated a little bit, but honestly I hope that I can make something that you guys can benefit from. So, I'm gonna see you soon, in the next blog post of this Tensorflow series.
