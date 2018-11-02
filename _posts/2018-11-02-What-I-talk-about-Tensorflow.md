@@ -51,7 +51,7 @@ Below, I'm gonna list out some "concepts" that are mostly confusing to beginners
 
 It used to be how we did everything in Tensorflow when it first came out. Want to create a fully connected layer? Create some weights, some biases and roll them in!
 
-```Python
+```
 with tf.variable_scopes('fc_layer'):
   weights = tf.get_variables('weights', [5, 5, 3, 64],
                              initializer=tf.initializers.truncated_normal(stddev=5e-2))
@@ -70,14 +70,14 @@ You are likely to come across tf.contrib.layers a lot. Basically, it's backed by
 
 As its name is self explained, this is the package for defining layers. We can think of it as an official version of tf.contrib.layers. They basically do the same job: to make defining layers less tiresome. Using tf.contrib.layers or tf.layers to create a conv2d layer like we did above, we now need only one line:
 
-```Python
+```
 output = tf.contrib.layers.conv2d(inputs, 64, [5, 5],
                                   weights_initializer=tf.initializers.truncated_normal(stddev=5e-2))
 ```
 
 Or with tf.layers:
 
-```Python
+```
 output = tf.layers.conv2d(inputs, 64, [5, 5],
                           padding='same',
                           kernel_initializer=tf.initializers.truncated_normal(stddev=5e-2))
@@ -89,7 +89,7 @@ I bet you wouldn't create any layers by hand from now on!
 
 Okay, this may be the most confusing one. At first, I thought that was the light-weight version of Tensorflow but soon enough, I realized I was wrong. **slim** only stands for fewer lines to do the same thing (comparing with low-level API). For example, to create not only one, but three conv2d layers, we only need to write one line:
 
-```Python
+```
 slim = tf.contrib.slim
 output = slim.repeat(inputs, 3, slim.conv2d, 64, [5, 5])
 ```
@@ -104,7 +104,7 @@ This is legend! Keras came out when we had to write everything using low-level A
 
 The great thing about Keras is, it does all the hard tasks for you. So going from idea to result is just a piece of cake. Want to create a network? Just stack up the layers! Want to train it? Just compile and call fit!
 
-```Python
+```
 model = Sequential()
 model.add(Dense(out_size, activation='relu', input_shape=(in_size,)))
 # Add more here
@@ -125,7 +125,7 @@ As I mentioned earlier, when implementing in Tensorflow, you must first define a
 
 So Eager Execution came out to help deal with these problems. The name is kind of weird though. I interprete it as "can't wait to execute". With the additional 2 new lines, you can now do something like: evaluate the new created variable (which is trivial but used to be impossible in Tensorflow):
 
-```Python
+```
 tf.enable_eager_execution()
 tf.executing_eagerly()
 import tensorflow.contrib.eager as tfe
@@ -150,7 +150,7 @@ Let's start with tf.contrib.layers (tf.contrib is technically big and capable of
 
 I don't want to think of the amount of work to achieve the same result by using low-level API. That's why having any kinds of high-level API will save us a ton of time and effort. Not only researchers, developers do love high-level APIs!
 
-```Python
+```
 # The inputs we use is one image of shape (224, 224, 3)
 inputs = tf.placeholder(tf.float32, [1, 224, 224, 3])
 
@@ -168,7 +168,7 @@ conv2d = tf.contrib.layers.conv2d(inputs=inputs,
 
 Next, let's see how we can create a convolution2d layer with tf.layers, an official modules by the core team of Tensorflow ;) Obviously we at least expect that it can produce the same result, with less or similar or effort.
 
-```Python
+```
 conv2d = tf.layers.conv2d(inputs=inputs,
                           filters=64,
                           kernel_size=3,
@@ -184,7 +184,7 @@ It's time to compare the results. Did both of tf.contrib and tf.layers produce t
 
 First, let's consider the variables created by above commands. (You can use the method tf.global_variables() to get all variables in the current graph)
 
-```Python
+```
 # Variables created by tf.contrib.layers.conv2d
 [<tf.Variable 'Conv/weights:0' shape=(3, 3, 3, 64) dtype=float32_ref>, <tf.Variable 'Conv/biases:0' shape=(64,) dtype=float32_ref>]
 
@@ -196,7 +196,7 @@ Phew, the variable sets are similar. They both created a weights Tensor, and a b
 Next, let's check if the two functions generated different sets of operations. (The command we can use is 
 tf.get_default_graph().get_operations())
 
-```Python
+```
 # Operations created by tf.contrib.layers.conv2d
 <tf.Operation 'Placeholder' type=Placeholder>, 
 <tf.Operation 'Conv/weights/Initializer/truncated_normal/shape' type=Const>, 
