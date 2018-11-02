@@ -32,22 +32,22 @@ So, here's what we will do in this post:
 
 Okay, let's tackle them one by one!
 
-### Common Problems
+## Common Problems
 Before diving in the details, I think I should list out the most common problems that we might face when using Tensorflow:
-1. Don't know how to start
+### Don't know how to start
 
 Whether it comes to importing data, creating the model or visualizing the results, we usually get confused. Technically, there are so many ways to do the exact same thing in Tensorflow. And it's the urge of doing things in the most proper way that drives us crazy.
 
-2. Don't know what to do when things go wrong
+### Don't know what to do when things go wrong
 
 I think this is the problem that a lot of you guys can relate to. In Tensorflow, we must first define the computation graph. Not only doing this way prevents us from modifying the graph when it's running (sometimes we just want it to be dynamic), but it also does a good job at hiding things from us, which we can't know what the hell under the hood is causing the trouble. We are the Python guys, we want things to be Pythonic!
 
-### Tensorflow's Vocabulary
+## Tensorflow's Vocabulary
 As I said above, one problem with Tensorflow is that there are a lot of ways to do the exact same thing. Even experienced users find it confusing sometimes.
 
 Below, I'm gonna list out some "concepts" that are mostly confusing to beginners:
 
-1. Low-level API
+### Low-level API
 
 It used to be how we did everything in Tensorflow when it first came out. Want to create a fully connected layer? Create some weights, some biases and roll them in!
 
@@ -62,11 +62,11 @@ with tf.variable_scopes('fc_layer'):
   output = tf.nn.relu(output)
 ```
 
-2. tf.contrib
+### tf.contrib
 
 You are likely to come across tf.contrib.layers a lot. Basically, it's backed by the large community of Tensorflow (contribution) and it contains experimental implementation, such as a newly introduced layer, a new optimization method, or even wrappers for low-level API, etc. Although they are technically just experimental codes, they actually work well and will be merged to Tensorflow's core code in the future.
 
-4. tf.layers
+### tf.layers
 
 As its name is self explained, this is the package for defining layers. We can think of it as an official version of tf.contrib.layers. They basically do the same job: to make defining layers less tiresome. Using tf.contrib.layers or tf.layers to create a conv2d layer like we did above, we now need only one line:
 
@@ -85,7 +85,7 @@ output = tf.layers.conv2d(inputs, 64, [5, 5],
 
 I bet you wouldn't create any layers by hand from now on!
 
-5. tf.contrib.slim (or TF-Slim)
+### tf.contrib.slim (or TF-Slim)
 
 Okay, this may be the most confusing one. At first, I thought that was the light-weight version of Tensorflow but soon enough, I realized I was wrong. **slim** only stands for fewer lines to do the same thing (comparing with low-level API). For example, to create not only one, but three conv2d layers, we only need to write one line:
 
@@ -98,7 +98,7 @@ Other than that though, tf.slim can help you build an entire pipeline for traini
 
 Overall, TF-Slim may be a good option for fast experimenting new idea (Tensorflow's research uses TF-Slim for building the networks). What you need to take into account is, TF-Slim's codes actually came from tf.contrib (e.g. slim.conv2d is just an alias for tf.contrib.layers.conv2d), so there's no magic here.
 
-6. tf.keras
+### tf.keras
 
 This is legend! Keras came out when we had to write everything using low-level API. So technically it was used as the high-level API for Tensorflow. In my opinion, it did help make the community (especially researchers) adopt Tensorflow. And since Keras is officially a module of Tensorflow (from version 1.0 I think), you don't have to worry about version compatibility any more.
 
@@ -119,7 +119,7 @@ model.fit(x=inputs, y=labels)
 
 Although Keras is super convenient, especially for those who don't like to write code, it abstracts so many things from us. François Chollet, the author of Keras, claimed that Keras will act like an interface only, but it does have some constraints which may confuse you sometimes (Want model.fit to compute validation loss after a specific number of batches? It can't!). You may also have hard time implementing newly introduced deep-learning papers entirely by Keras since they require some minor tweaks within some layer.
 
-7. Eager Execution
+### Eager Execution
 
 As I mentioned earlier, when implementing in Tensorflow, you must first define all the operations to form a graph. It's not until the graph is finalized (it's locked, no more in, no more out, no more update) that you can run it to see the results. Because of this, Tensorflow is hard to debug and incapable of creating dynamic graph.
 
@@ -139,12 +139,12 @@ array([[ 0.06691323, -0.01890625, -0.00283119],
 
 Rumor has it Eager Execution is gonna be set to default from Tensorflow 2.0. I think this move will please a lot of Tensorflow fans out there. But please bear in mind that at the moment, not everything is gonna work in Eager Execution mode (yet). So while we're waiting for Tensorflow 2.0 to be released, it's a good idea to stay updated to the latest news from Tensorflow's team and Google.
 
-### (Optional) Let's play with Tensors!
+## (Optional) Let's play with Tensors!
 Okay guys, this is an optional section. We're gonna see if different approaches produce exactly the same results. We're gonna create a "real" convolution2d layer, including activation functions and regularization terms, by using tf.contrib.layers and tf.layers. We will check the similarity among their results by checking the variables and operations that they created.
 
 Oh hold on! There's one more thing I want you to pay attention to. I will write out all the arguments whether some of them have default values. The reason is, the two modules' conv2d functions set the default values differently for the same terms! For example, padding is set to 'SAME' by default in tf.contrib.layers.conv2d, but 'valid' in case of tf.layers.conv2d. Now we're ready to move on.
 
-1. tf.contrib.layers
+### tf.contrib.layers
 
 Let's start with tf.contrib.layers (tf.contrib is technically big and capable of a lot of things, so by saying tf.contrib.layers here seems more appropriate).
 
@@ -164,7 +164,7 @@ conv2d = tf.contrib.layers.conv2d(inputs=inputs,
                                   weights_regularizer=tf.contrib.layers.l2_regularizer(0.005),
                                   biases_initializer=tf.zeros_initializer())
 ```
-2. tf.layers
+### tf.layers
 
 Next, let's see how we can create a convolution2d layer with tf.layers, an official modules by the core team of Tensorflow ;) Obviously we at least expect that it can produce the same result, with less or similar or effort.
 
