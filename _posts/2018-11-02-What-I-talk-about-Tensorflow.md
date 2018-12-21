@@ -1,5 +1,5 @@
 ---
-title: "Tensorflow 0: What I talk when I talk about Tensorflow"
+title: "What I talk when I talk about Tensorflow"
 header:
   teaser: projects/tensorflow-install/tensorflow_logo.png
 categories:
